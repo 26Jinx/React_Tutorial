@@ -49,10 +49,11 @@ class Game extends React.Component {
         super(props);
         this.state = {
             history: [{
-                squares: Array(9).fill(null),
+                squares: Array(9).fill(null),  // [null, null, ..., null] (length 9)
             }],
             stepNumber: 0,
             xIsNext: true,
+            coordinates: [0, 0],
         };
     }
 
@@ -60,6 +61,7 @@ class Game extends React.Component {
         const history = this.state.history.slice(0, this.state.stepNumber + 1);
         const current = history[history.length - 1];
         const squares = current.squares.slice();
+        const coordinates = get_coordinates(i);
 
         if (calculateWinner(squares) || squares[i]) {
             return;
@@ -73,6 +75,7 @@ class Game extends React.Component {
             }]),
             stepNumber: history.length,
             xIsNext: !this.state.xIsNext,
+            coordinates: coordinates,
         });
     }
 
@@ -85,11 +88,13 @@ class Game extends React.Component {
 
     render() {
         const history = this.state.history;
-        const current = history[this.state.stepNumber];
+        const current = history[this.state.stepNumber];    // current step
         const winner = calculateWinner(current.squares);
+        const coordinates = this.state.coordinates;
 
         const moves = history.map((step, move) => {
-            const desc = move ? 'Go to move #' + move : 'Go to game start';
+            const desc = (move ? 'Go to move #' + move : 'Go to game start') + ' | Location (Row: ' + coordinates[0] + ' Column:' +
+                ' ' + coordinates[1] + ')';
             return (
                 <li key={move}>
                     <button onClick={() => this.jumpTo(move)}> { desc } </button>
@@ -146,4 +151,20 @@ function calculateWinner(squares) {
         }
     }
     return null;
+}
+
+function get_coordinates(square) {
+    const coordinates = {
+        0: [1, 1],
+        1: [1, 2],
+        2: [1, 3],
+        3: [2, 1],
+        4: [2, 2],
+        5: [2, 3],
+        6: [3, 1],
+        7: [3, 2],
+        8: [3, 3]
+    };
+
+    return coordinates[square];
 }
