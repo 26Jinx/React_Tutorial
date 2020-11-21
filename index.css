@@ -7,6 +7,10 @@ ol, ul {
     padding-left: 30px;
 }
 
+li {
+    margin-bottom: 5px;
+}
+
 .board-row:after {
     clear: both;
     content: "";
@@ -33,7 +37,11 @@ ol, ul {
 }
 
 .square:focus {
-    outline: none;
+    outline: 10px;
+}
+
+.square:hover {
+    background-color: aquamarine;
 }
 
 .kbd-navigation .square:focus {
