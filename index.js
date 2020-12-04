@@ -119,6 +119,8 @@ class Game extends React.Component {
             );
         });
 
+        const movesList = movesListOrder === "Ascending" ? moves : moves.reverse();
+
         let status;
         if (winner) {
             status = 'Winner: ' + winner;
@@ -143,7 +145,7 @@ class Game extends React.Component {
                             </button>
                         </div>
                     </div>
-                    <ol>{ moves }</ol>
+                    <ol>{ movesList }</ol>
                 </div>
             </div>
         );
