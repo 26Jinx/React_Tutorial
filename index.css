@@ -56,3 +56,8 @@ li {
 .game-info {
     margin-left: 20px;
 }
+
+#status, #toggleBtn {
+    display: inline;
+    margin-right: 30px;
+}
