@@ -58,7 +58,6 @@ li {
 }
 
 #status, #toggleBtn {
-    display: inline;
-    margin-right: 30px;
+    display: inline-block;
     width: 200px;
 }
