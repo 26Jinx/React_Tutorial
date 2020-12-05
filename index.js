@@ -103,6 +103,10 @@ class Game extends React.Component {
         })
     }
 
+    highLightWinner() {
+
+    }
+
     render() {
         const history = this.state.history;
         const current = history[this.state.stepNumber];    // current step
@@ -121,9 +125,11 @@ class Game extends React.Component {
 
         const movesList = movesListOrder === "Ascending" ? moves : moves.reverse();
 
-        let status;
+        let status, winningLine;
         if (winner) {
-            status = 'Winner: ' + winner;
+            status = 'Winner: ' + winner[0];
+            winningLine = winner[1];
+            console.log(winningLine);
         } else {
             status = 'Next player: ' + (this.state.xIsNext ? 'X' : 'O');
         }
@@ -173,7 +179,7 @@ function calculateWinner(squares) {
     for (let i = 0; i < lines.length; i++) {
         const [a, b, c] = lines[i];
         if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
-            return squares[a];
+            return [squares[a], lines[i]];
         }
     }
     return null;
